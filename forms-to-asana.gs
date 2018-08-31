@@ -61,7 +61,7 @@ function PostData(e)
 		"name" : title, // Task title
 		"html_notes" : body, // Task description (rich text)
 		"due_on" : d.format("Y-m-d"), // Due date
-		"followers" : assignee
+		"followers" : assignee  // It's usually better to add followers later, see below.
 	};
 	var options = { "method" : "post", "payload" : payload, "muteHttpExceptions": true};
 	options.headers = AuthData();
@@ -82,13 +82,16 @@ function PostData(e)
 	/**
 	* Add followers
 	*/
-    var followers = e.namedValues["Email Address"].toString();
-	if (e.namedValues["Who should be copied on this purchase order?"].toString() !== "")
-		followers += "," + e.namedValues["Who should be copied on this purchase order?"].toString();
+	//If you there is an invalid follower during task creation, the task will not be made.  If we add followers as a second step, that won't be an issue.
+    var followers = e.namedValues["Email Address"].toString(); // The person who submitted the form (in case they didn't get added by the logic above)
+	if (e.namedValues["Who should be copied on this purchase order?"].toString() !== "") // Should anyone else follow this?
+		followers += "," + e.namedValues["Who should be copied on this purchase order?"].toString(); // Yes, so add them to this CSV list
 
+	// If users are typing names instead of emails, you can fix that with a replace statement:
 	followers = followers.replace("John Smith", "john.smith@eg.com");
 	followers = followers.replace("Jane Smith", "jane.smith@eg.com");
 
+	// remove any whitespace that might have happned
   followers = followers.replace(/\s/g, "");
 
 	var num = 0;
