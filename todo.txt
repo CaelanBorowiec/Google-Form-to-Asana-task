@@ -1,0 +1,5 @@
+#ToDo: make a real readme
+
+1. Create a google form
+2. Create a create a responses spreadsheet
+3. 
