@@ -1,9 +1,1 @@
-#ToDo: make a real readme
-
-1. Create a google form
-2. Create a create a responses spreadsheet
-3. Create code project in spreadsheet
-4. Edit script to match form
-5. Set up triggers.
-
 ##?: Make sure this works with the unicode fix I developed a while ago
